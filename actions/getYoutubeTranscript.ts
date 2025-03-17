@@ -1,24 +1,24 @@
 "use server";
 
-// import { api } from "@/convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 import { FeatureFlag, featureFlagEvents } from "@/features/flags";
 import { client } from "@/lib/schematic";
 import { currentUser } from "@clerk/nextjs/server";
-// import { ConvexHttpClient } from "convex/browser";
-// import { Innertube } from "youtubei.js";
+import { ConvexHttpClient } from "convex/browser";
+import { Innertube } from "youtubei.js";
 
-// const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 export interface TranscriptEntry {
   text: string;
   timestamp: string;
 }
 
-// const youtube = await Innertube.create({
-//   lang: "en",
-//   location: "US",
-//   retrieve_player: false,
-// });
+const youtube = await Innertube.create({
+  lang: "en",
+  location: "US",
+  retrieve_player: false,
+});
 
 function formatTimestamp(start_ms: number): string {
   const minutes = Math.floor(start_ms / 60000);

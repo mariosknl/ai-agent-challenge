@@ -1,13 +1,13 @@
 "use client";
 
 import { createOrGetVideo } from "@/actions/createOrGetVideo";
-// import AiAgentChat from "@/components/AiAgentChat";
+import AiAgentChat from "@/components/AiAgentChat";
 import ThumbnailGeneration from "@/components/ThumbnailGeneration";
 import TitleGenerations from "@/components/TitleGenerations";
 import Transcription from "@/components/Transcription";
 import Usage from "@/components/Usage";
 import YoutubeVideoDetails from "@/components/YoutubeVideoDetails";
-// import { Doc } from "@/convex/_generated/dataModel";
+import { Doc } from "@/convex/_generated/dataModel";
 import { FeatureFlag } from "@/features/flags";
 import { useUser } from "@clerk/nextjs";
 import { useParams } from "next/navigation";
@@ -17,7 +17,11 @@ function AnalysisPage() {
   const params = useParams<{ videoId: string }>();
   const { videoId } = params;
   const { user } = useUser();
-  const [video, setVideo] = useState(undefined);
+  const [video, setVideo] = useState<Doc<"videos"> | null | undefined>(
+    undefined
+  );
+
+  console.log(videoId);
 
   useEffect(() => {
     if (!user?.id) return;
@@ -96,7 +100,7 @@ function AnalysisPage() {
         {/* Right Side */}
         <div className="order-1 lg:order-2 lg:sticky lg:top-20 h-[500px] md:h-[calc(100vh-6rem)]">
           {/* Ai Agent Chat Section */}
-          {/* <AiAgentChat videoId={videoId} /> */}
+          <AiAgentChat videoId={videoId} />
         </div>
       </div>
     </div>
